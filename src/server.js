@@ -15,7 +15,7 @@ import { validateApiToken } from './middlewares/apiAuth';
 
 // Create Express webapp and connect socket.io
 const app = express();
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 3000;
 
 app.enable("trust proxy");
 
