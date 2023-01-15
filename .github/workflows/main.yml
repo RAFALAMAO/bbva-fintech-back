@@ -30,4 +30,6 @@ jobs:
     - run: npm run build --if-present
 
     - run: forever stopall
+    - run: cd /var/www/bbva-back/bbva-backend/bbva-fintech-back/bbva-fintech-back
+    - run: cat package.json
     - run: forever start -c node_modules/.bin/babel-node src/server.js
