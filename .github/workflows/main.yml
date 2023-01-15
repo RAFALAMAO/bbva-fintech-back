@@ -29,8 +29,9 @@ jobs:
     - run: npm i
     - run: npm run build --if-present
 
-    - run: | #!/bin/bash
-          forever stopall
-          fuser -k 3000/tcp
-          cd /var/www/bbva-back/bbva-backend/bbva-fintech-back/bbva-fintech-back
-          forever start -c node_modules/.bin/babel-node src/server.js
+    - run: |
+        #!/bin/bash
+        forever stopall
+        fuser -k 3000/tcp
+        cd /var/www/bbva-back/bbva-backend/bbva-fintech-back/bbva-fintech-back
+        forever start -c node_modules/.bin/babel-node src/server.js
