@@ -1,7 +1,18 @@
 require('dotenv').config();
 
+// Seleccion de entorno
+const NODE_ENV = process.env.NODE_ENV;
+
+const handlerHost = (node_env) => {
+	if( node_env === 'development' ){
+		return '127.0.0.1';
+	} else {
+		return process.env.DB_HOST;
+	}
+}
+
 // === DATABASE
-const DB_HOST = process.env.DB_HOST;
+const DB_HOST = handlerHost(NODE_ENV);
 const DB_USER = process.env.DB_USER;
 const DB_PASSWORD = process.env.DB_PASSWORD;
 const DB_TYPE = process.env.DB_TYPE;
@@ -9,9 +20,6 @@ const DB_NAME = process.env.DB_NAME;
 
 // === API
 const API_TOKEN = process.env.API_TOKEN;
-
-// Seleccion de entorno
-const NODE_ENV = process.env.NODE_ENV;
 
 module.exports = {
 	DB_HOST,

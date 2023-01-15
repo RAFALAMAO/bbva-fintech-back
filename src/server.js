@@ -32,6 +32,7 @@ app.use(validateApiToken);
 app.set('port', port);
 
 app.use('/v1', routesV1.healt);
+app.use('/v1', routesV1.login);
 
 // Create http server and run it.
 app.listen(port, function () {
