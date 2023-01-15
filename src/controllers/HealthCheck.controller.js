@@ -18,7 +18,7 @@ class HealthCheckControler {
         uptime: uptimeString,
         message: 'OK',
         timestamp: dateNow.toLocaleString(),
-        other: 'Esto'
+        other: 'Esto con pm2'
       }
       return res.status(200).json(healthcheck);
     } catch (err) {
