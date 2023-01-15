@@ -17,7 +17,8 @@ class HealthCheckControler {
       const healthcheck = {
         uptime: uptimeString,
         message: 'OK',
-        timestamp: dateNow.toLocaleString()
+        timestamp: dateNow.toLocaleString(),
+        other: 'Esto es para probar al funcionamiento del action'
       }
       return res.status(200).json(healthcheck);
     } catch (err) {
