@@ -10,6 +10,13 @@ class LoginService {
       data: {}
 		};
 
+    if ( !email || !password) {
+      // user with provided email not found
+      response.message = 'Faltan datos para podera realizar la petición';
+      response.status = 400;
+      return response;
+    }
+
     const userQuery = new UserQuery();
 
     try {
