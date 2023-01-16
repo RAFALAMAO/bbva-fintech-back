@@ -12,8 +12,8 @@ class LoginService {
 
     if ( !email || !password) {
       // user with provided email not found
-      response.message = 'Faltan datos para podera realizar la petición';
-      response.status = 400;
+      response.message = 'Se deben de ingresar correo y contraseña para iniciar sesión';
+      response.status = 200;
       return response;
     }
 
