@@ -2,7 +2,7 @@ import { environment_prod } from "../config";
 
 const whiteList = environment_prod
   ? ["http://20.114.144.5/"]
-  : ["https://develop.lendinc.mx", "http://localhost:3000", "http://localhost:3001", "http://localhost:3002"];
+  : ["https://develop.lendinc.mx", "http://localhost:3000", "http://localhost:3001", "http://localhost:3002", "http://127.0.0.1/"];
 
 const corsOptions = {
     origin: function(origin, callback){
