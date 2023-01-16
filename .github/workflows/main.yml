@@ -28,4 +28,5 @@ jobs:
         cache: 'npm'
     - run: npm i
     - run: npm run build --if-present
+    - run: cp /var/www/.env_back /var/www/bbva-back/bbva-backend/bbva-fintech-back/bbva-fintech-back/.env
     - run: pm2 restart npm
