@@ -13,9 +13,7 @@ class LoginService {
     const userQuery = new UserQuery();
 
     try {
-      const user = await userQuery.findOne({
-        where: { correo_electronico: email },
-      });
+      const user = await userQuery.getUserWithRole(email);
 
       if (!user) {
         // user with provided email not found
@@ -31,13 +29,7 @@ class LoginService {
         return response;
       }
 
-      // Enviar la información del paso en el que se encuentra
-      if( user.role_id && user.role_id === 1 ){
-        response.role = 'admin';
-        return response;
-      }
-
-      response.role = 'customer';
+      response.role = user.user_role.role;
 
       return response;
 

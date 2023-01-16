@@ -30,15 +30,20 @@ try {
 // ========= Models import, ordered by group and association
 const Users = sequelize.import('./users');
 const User_role = sequelize.import('./user_role');
+const User_doctos = sequelize.import('./user_doctos');
 
 // ========= Associations
 User_role.hasMany(Users, { sourceKey: 'id', foreignKey: 'role_id' });
 Users.belongsTo(User_role, { targetKey: 'id', foreignKey: 'role_id' });
 
+Users.hasMany(User_doctos, { sourceKey: 'id', foreignKey: 'user_id' });
+User_doctos.belongsTo(Users, { targetKey: 'id', foreignKey: 'user_id' });
+
 // Models
 const models = {
 	Users,
-	User_role
+	User_role,
+	User_doctos
 };
 
 // include sequelize

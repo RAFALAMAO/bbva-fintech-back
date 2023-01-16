@@ -8,4 +8,19 @@ export default class UserQuery extends MasterQuery {
 
       this.userModel = userModel;
    }
+
+   async getUserWithRole(email) {
+      const obtainedUser = await this.userModel.findOne({
+         include: [
+            {
+               model: BBVAModels.User_role,
+            }
+         ],
+         where: {
+            correo_electronico: email
+         }
+      });
+
+      return obtainedUser;
+   }
 }
