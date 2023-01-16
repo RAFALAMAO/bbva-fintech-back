@@ -29,13 +29,16 @@ try {
 
 // ========= Models import, ordered by group and association
 const Users = sequelize.import('./users');
+const User_role = sequelize.import('./user_role');
 
 // ========= Associations
-
+User_role.hasMany(Users, { sourceKey: 'id', foreignKey: 'role_id' });
+Users.belongsTo(User_role, { targetKey: 'id', foreignKey: 'role_id' });
 
 // Models
 const models = {
 	Users,
+	User_role
 };
 
 // include sequelize

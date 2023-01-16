@@ -4,10 +4,9 @@ class LoginController {
 
 	static async Login(req, res) {
 		const { email, password } = req.body;
-		const role = req.get('role');
-		const { status, message, jwtToken, data } = await LoginService.Login({ email, password, role });
+		const { status, message, jwtToken, role } = await LoginService.Login({ email, password });
 
-		return res.status(status).json({ status, message, jwtToken, data });
+		return res.status(status).json({ status, message, jwtToken, role });
 	}
 
 }

@@ -9,13 +9,16 @@ export default (sequelize, DataTypes) => {
 				primaryKey: true,
 				type: DataTypes.INTEGER(11),
 			},
-
+			role_id: {
+				type: DataTypes.INTEGER(11),
+				allowNull: false,
+				references: {
+					model: "user_role",
+					key: "id"
+				}
+			},
 
 			primer_nombre: {
-				type: DataTypes.STRING(50),
-				allowNull: true,
-			},
-			segundo_nombre: {
 				type: DataTypes.STRING(50),
 				allowNull: true,
 			},
