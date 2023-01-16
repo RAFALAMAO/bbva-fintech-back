@@ -24,7 +24,7 @@ app.use(helmet.hidePoweredBy());
 app.use(logger('combined'));
 app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: false }));
-app.use(express.json({ limit: '60mb' }));
+app.use(express.json({ limit: '2mb' }));
 
 // Auth API Token
 app.use(validateApiToken);

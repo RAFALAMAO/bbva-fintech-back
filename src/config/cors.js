@@ -2,7 +2,6 @@ const whiteList = ["http://localhost:3000", "http://localhost:3001", "http://loc
 
 const corsOptions = {
     origin: function(origin, callback){
-        console.log('El origen a admitir', origin)
         // allow requests with no origin
         // (like mobile apps or curl requests)
         if(!origin) return callback(null, true);
