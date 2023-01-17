@@ -4,7 +4,7 @@ import {
 } from "../config/index";
 const { BlobServiceClient } = require("@azure/storage-blob");
 
-import { UserQuery } from "../database/queries";
+import { UserQuery, UserDoctosQuery } from "../database/queries";
 
 
 class azureStorageBlobService {
@@ -17,6 +17,7 @@ class azureStorageBlobService {
 		};
 		const { email, docto } = body;
 		const userQuery =  new UserQuery();
+		const userDoctosQuery = new UserDoctosQuery();
 
 		try {
 			const dbUser = await userQuery.findOne({
@@ -55,6 +56,9 @@ class azureStorageBlobService {
 			const uploadBlobResponse = await blockBlobClient.uploadData(imgBuffer);
 
 			console.log(`Blob was uploaded successfully. requestId: ${uploadBlobResponse.requestId}`);
+
+			// Save url doc to db
+			await userDoctosQuery.createOrUpdate(dbUser.id, blockBlobClient.url);
 
 			response.docLink = blockBlobClient.url;
 			return response;
