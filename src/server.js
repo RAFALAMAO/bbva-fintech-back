@@ -34,6 +34,7 @@ app.set('port', port);
 app.use('/v1', routesV1.healt);
 app.use('/v1', routesV1.login);
 app.use('/v1', routesV1.azureStorageBlob);
+app.use('/v1', routesV1.registerUser);
 
 // Create http server and run it.
 app.listen(port, function () {

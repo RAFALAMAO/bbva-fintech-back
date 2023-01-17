@@ -1,7 +1,7 @@
 'use strict';
 import { AzureStorageBlobService } from '../services';
 
-class azureStorageBlobController {
+class AzureStorageBlobController {
 	static async uploadDocuments(req, res,) {
         try {
 			const { status, message, docLink } = await AzureStorageBlobService.uploadDocuments(req.body);
@@ -25,4 +25,4 @@ class azureStorageBlobController {
 	}
 }
 
-module.exports = azureStorageBlobController;
+module.exports = AzureStorageBlobController;
