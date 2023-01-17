@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 import { UserQuery } from "../database/queries";
 
 class registerUserService {
-  static async RegisterUpdateUser({ user, application }) {
+  static async RegisterUpdateUser({ user }) {
     let response = {
 			status: 200,
 			message: 'Register/update user success',
@@ -10,9 +10,15 @@ class registerUserService {
 
     const userQuery = new UserQuery();
     console.log(user)
-    console.log(application)
 
     try {
+      if ( !user.correo_electronico || !user.contrasenia) {
+        // user with provided email not found
+        response.message = 'Al menos debe existir el correo y la contraseña';
+        response.status = 200;
+        return response;
+      }
+
       const obtainedUser = await userQuery.findOne({
         where: {
           correo_electronico: user.correo_electronico
@@ -29,7 +35,7 @@ class registerUserService {
       const hashedPassword = await bcrypt.hash(user.contrasenia, 12);
       user.role_id = 2;
       user.contrasenia = hashedPassword;
-      const createdUser = await userQuery.create(user);
+      const createdUser = await userQuery.createUserWithApplication(user);
 
       console.log(createdUser.id)
 

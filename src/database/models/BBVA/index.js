@@ -31,6 +31,7 @@ try {
 const Users = sequelize.import('./users');
 const User_role = sequelize.import('./user_role');
 const User_doctos = sequelize.import('./user_doctos');
+const Application = sequelize.import('./application');
 
 // ========= Associations
 User_role.hasMany(Users, { sourceKey: 'id', foreignKey: 'role_id' });
@@ -39,11 +40,15 @@ Users.belongsTo(User_role, { targetKey: 'id', foreignKey: 'role_id' });
 Users.hasMany(User_doctos, { sourceKey: 'id', foreignKey: 'user_id' });
 User_doctos.belongsTo(Users, { targetKey: 'id', foreignKey: 'user_id' });
 
+Users.hasOne(Application, { sourceKey: 'id', foreignKey: 'user_id' });
+Application.belongsTo(Users, { targetKey: 'id', foreignKey: 'user_id' });
+
 // Models
 const models = {
 	Users,
 	User_role,
-	User_doctos
+	User_doctos,
+	Application
 };
 
 // include sequelize

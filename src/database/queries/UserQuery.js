@@ -28,10 +28,21 @@ export default class UserQuery extends MasterQuery {
     const obtainedUsersDoctos = await this.userModel.findAll({
       include: [
         { model: BBVAModels.User_doctos },
+        { model: BBVAModels.Application },
       ],
       where: {
 				role_id: 2
       },
+    });
+
+    return obtainedUsersDoctos;
+  }
+
+  async createUserWithApplication(data) {
+    const obtainedUsersDoctos = await this.userModel.create(data, {
+      include: [
+        { model: BBVAModels.Application },
+      ],
     });
 
     return obtainedUsersDoctos;
