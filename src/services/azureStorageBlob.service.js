@@ -75,37 +75,24 @@ class azureStorageBlobService {
 			message: 'Get files success',
 			documents: [],
 		};
+		const userQuery =  new UserQuery();
 
 		try {
-			if (!AZURE_STORAGE_CONNECTION_STRING) {
-				throw Error('Azure Storage Connection string not found');
+			const usersDocs = await userQuery.getUsersDocs();
+
+			if( !usersDocs ) {
+				response.message = 'Users not found';
+				response.status = 404;
+				return response;
 			}
 
-			// Create the BlobServiceClient object with connection string
-			const blobServiceClient = BlobServiceClient.fromConnectionString(
-				AZURE_STORAGE_CONNECTION_STRING
-			);
-
-			// Get a reference to a container
-			const containerClient = blobServiceClient.getContainerClient(AZURE_STORAGE_CONTAINER_NAME);
-
-			let newUrls = [];
-
-			// List the blob(s) in the container.
-			for await (const blob of containerClient.listBlobsFlat()) {
-				// Get Blob Client from name, to get the URL
-				const tempBlockBlobClient = containerClient.getBlockBlobClient(blob.name);
-
-				// Display blob name and URL
-				newUrls.push({name: blob.name, URL: tempBlockBlobClient.url})
-				console.log(`name: ${blob.name} URL: ${tempBlockBlobClient.url}`);
-			}
-
+			response.documents = usersDocs;
 			return response;
 
 		} catch (error) {
-			console.log(error);
-			return 'error';
+			response.message = error.message;
+			response.status = 404;
+			return response;
 		}
 	}
 }
